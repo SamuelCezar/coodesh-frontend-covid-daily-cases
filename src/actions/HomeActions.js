@@ -2,7 +2,8 @@ import React, {useEffect, useState } from 'react';
 import { ComposableMap, Geographies, Geography} from 'react-simple-maps';
 import axios from 'axios';
 import { Apikey, BASE_URL } from '../service/basicService';
-// import { Button, DadosP, DateDados, DivInfo, DivInput, Options, Paragrafo, Selects } from './style';
+import {Container, FormControl, FormHelperText, MenuItem, Select} from "@mui/material";
+// import { Button, DadosP, DateDados, DivInfo, DivInput, Paragrafo } from './style';
 const _ = require("lodash");
 
 const geoUrl = 'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
@@ -75,27 +76,33 @@ function HomeActions({ setTooltipContent }) {
 
 
     return (
-        <>
-            <div>
-                <Selects onChange={onChange}>
-                    <Options value={nameVariant}>Alpha</Options>
-                    {infoCase.slice(1,24).map((dados) => {
-                        return (
-                            <Options key={dados.id} value={dados.variant}>
-                                {dados.variant}
-                            </Options>
-                        );
-                    })}
-                </Selects>
-
-                <Button disabled={habilitButton} onClick={() => onClickMap()}> ▶ Play Covid</Button>
-
+        <Container maxWidth={"80%"}>
+            <div style={{display: "flex", justifyContent:"center", margin: "10px 0",}}>
+                <FormControl sx={{ m: 1, minWidth: 250 }}>
+                    <Select onChange={onChange} label={"Variante"}>
+                        <FormHelperText>Selecione a variante</FormHelperText>
+                        <MenuItem value={nameVariant}>Alpha</MenuItem>
+                        {infoCase.slice(1,24).map((dados) => {
+                            return (
+                                <MenuItem key={dados.id} value={dados.variant}>
+                                    {dados.variant}
+                                </MenuItem>
+                            );
+                        })}
+                    </Select>
+                </FormControl>
+                <Button variant={"outlined"}
+                        sx={{m: 1, minWidth: 250}}
+                        disabled={habilitButton}
+                        onClick={() => onClickMap()}>
+                    ▶ Iniciar timelapse
+                </Button>
             </div>
 
-            <DivInfo>
-                <DadosP>Data: {dateSelect}</DadosP>
-                <DadosP>Variante: {nameVariant}</DadosP>
-            </DivInfo>
+            <div style={{display: "flex", justifyContent: "center", margin: "25px 0"}}>
+                <h2 style={{margin: "0 10%"}}>Date: {dateSelect}</h2>
+                <h2 style={{margin: "0 10%"}}>Variant: {nameVariant}</h2>
+            </div>
 
             <DivInput>
                 <DateDados>
@@ -151,7 +158,7 @@ function HomeActions({ setTooltipContent }) {
                     </Geographies>
                 </ComposableMap>
             </div>
-        </>
+        </Container>
     );
 };
 export default HomeActions;
