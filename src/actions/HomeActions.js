@@ -24,8 +24,9 @@ function HomeActions({ setTooltipContent }) {
         setDateSelect(date[value - 1])
     }
 
+    /*Ao usar a database da Supabase descomentar a ApiKey abaixo e configurar o basicService*/
     const getInfoCountry = () => {
-        axios.get(`${BASE_URL}`, Apikey).then((res) => {
+        axios.get(`${BASE_URL}`/*, Apikey*/).then((res) => {
             setInfoCases(res.data);
             dateCorrect();
         })
@@ -59,7 +60,7 @@ function HomeActions({ setTooltipContent }) {
                 setTimeout(function(){
                     setDateSelect(arr[x]);
                     setDateValue(x)
-                }, x * 2000); // 1000 = 1 segundo
+                }, x * 2000);
             }(x));
         }
     }
@@ -140,8 +141,8 @@ function HomeActions({ setTooltipContent }) {
                                                 }
                                             })
                                             setTooltipContent(`
-                Country: ${data.location || infoGeo} |
-                Cases total: ${totalCases}
+                País: ${data.location || infoGeo} |
+                Total de casos: ${totalCases}
                 `);
                                         }}
                                         onMouseLeave={() => setTooltipContent("")}
