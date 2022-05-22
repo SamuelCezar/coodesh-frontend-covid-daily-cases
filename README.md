@@ -35,5 +35,5 @@ https://coodesh-frontend-covid-daily-cases-samuelcezar.vercel.app/
 #### 3- Iniciar o projeto!
   - npm start
 
-####OBS* Projeto não foi construido responsivamente, por isso para visualização ideal é necessário acessar via desktop.
+#### OBS* Projeto não foi construido responsivamente, por isso para visualização ideal é necessário acessar via desktop.
 
