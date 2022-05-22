@@ -2,53 +2,45 @@
 
 Site: https://coodesh.com/
 
-### Repositório do desafio da CODESH 
-
 ## Desafio proposto
 
-Nesse desafio era necessário desenvolver uma REST API que utilizará o histórico de casos de Covid, disponível em https://www.kaggle.com/datasets/yamqwe/omicron-covid19-variant-daily-cases.
+Nesse desafio era necessário desenvolver em 5 dias uma REST API que utilizaria o histórico de casos de Covid, disponível em https://www.kaggle.com/datasets/yamqwe/omicron-covid19-variant-daily-cases.
 No desafio também foi proposto desenvolver um projeto front-end para consumir as informações uma API gerada.
 O projeto a ser desenvolvido tem como objetivo exibir o número de casos por país, dia e variante. Para isso será necessário gerar um gráfico que mostre o mapa mundi.
 
 ### Frameworks e tecnologias usadas:
 - HTML, CSS E JAVASCRIPT
-- React
+- React JS
 - Material UI
 
 
-### Veja o projeto: https://covid-cases-really-3f58oa8kj-andreyna1808.vercel.app/
+### Veja o projeto funcionando em:
 
 
-### IMAGEM EM DESKTOP E MOBILE
-
-![resultado](https://user-images.githubusercontent.com/87716793/160861647-daea5d01-76d2-4880-b351-568e1a889473.png)
 
 
-### Como utilizar o projeto
+### Imagem do layout final do projeto:
+
+![aparencia final do projeto](src/assets/img/Example.png)
+
+
+### Como configurar e utilizar o projeto em 4 passos:
 
 ##### 1- Clonar o repositório
 
+##### 2 - Instalar as dependencias usando NPM ou Yarn:
 
-  ##### 2- Entrar no diretório
-  ❯ cd CovidDailyCases
-  
-  ❯ cd cases-covid
-  
-##### 3- Para instalar as dependências e iniciar o projeto, você pode utilizar o Yarn ou NPM:
+- npm install
 
-##### 3.1 - Utilizando yarn
+## ATENÇÃO!
+### Por questões de performance, por default default o projeto vai configurado para consumir os dados através de um servidor local, por isso será necessário subir o servidor JSONSERVER através do comando abaixo:
 
- ###### Instalar as dependências
-  ❯ yarn
+#### 3- json-server --watch db.json --port 5000
 
-###### Iniciar o projeto
-  ❯ yarn dev:server
-  
-##### 3.2 - Utilizando npm
+A porta utilizada tem que ser especificada para não conflitar com a porta usada para subir a aplicação React. Nesse caso a escolhida foi a 5000.
 
- ###### Instalar as dependências
-  ❯ npm install
+#### OBS* O projeto também já vem pronto para usar a database fornecida Online pela Supabase. Basta mundar as rotas internas no arquivo URL.js.
 
- ###### Iniciar o projeto
-  ❯ npm start
+##### 4 - Iniciar o projeto
+  - npm start
 

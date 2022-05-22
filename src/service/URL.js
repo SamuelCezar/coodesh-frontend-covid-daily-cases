@@ -1,6 +1,7 @@
 export const BASE_URL = ' http://localhost:5000/covidData'
 
-/*Para usar a database fornecida pela Supabase comentar o codigo acima e descomentar o codigo abaixo*/
+/*Para usar a database fornecida ONLINE pela Supabase comentar o codigo acima e descomentar o codigo abaixo,
+* em seguida configurar a APIKEY no arquivo HomeActions dentro da pasta actions.*/
 
 // export const BASE_URL = 'https://xvyagnvdcjnbdzoskinq.supabase.co/rest/v1/coodesh-challenge'
 //
