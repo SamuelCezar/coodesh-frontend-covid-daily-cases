@@ -25,7 +25,6 @@ function HomeActions({ setTooltipContent }) {
     const [ date, setDate ] = useState([])
     const [ dateSelected, setDateSelected] = useState('11/05/2020')
     const [ dateValue, setDateValue ] = useState(0)
-    const [ habilitateButton, setHabilitateButton ] = useState(true)
 
     const onChange = (e) => {
         setVariant(e.target.value)
@@ -39,7 +38,7 @@ function HomeActions({ setTooltipContent }) {
     const getInfoCountry = () => {
         axios.get(`${BASE_URL}`, Apikey).then((resp) => {
             setCases(resp.data)
-            dateCorrect();
+            dateFormat();
             setIsDataCharged(true);
         })
             .catch((err) => {
@@ -50,13 +49,13 @@ function HomeActions({ setTooltipContent }) {
 
     function getTotalCases(countryName) {
         const covidDataTemp = cases.filter((country) => country.location === countryName);
-        const dadosFiltrados = [... new Set(covidDataTemp)]
-        const infoMore = dadosFiltrados.filter((info) => info.date === dateSelected && info.variant === variant)
-        return infoMore.reduce((previousValue, currentValue) => previousValue + currentValue.num_sequences_total, "")
+        const filteredData = [... new Set(covidDataTemp)]
+        const infoComplete = filteredData.filter((info) => info.date === dateSelected && info.variant === variant)
+        return infoComplete.reduce((previousValue, currentValue) => previousValue + currentValue.num_sequences_total, "")
     }
 
 
-    const dateCorrect = () => {
+    const dateFormat = () => {
         const arrayDatas = cases.map((res) => res.date)
         let arrayDatasFiltradas = [...new Set(arrayDatas)]
         arrayDatasFiltradas.sort(function(a,b) {
@@ -69,7 +68,6 @@ function HomeActions({ setTooltipContent }) {
             newArray.push(arrayDatasFiltradas[i])
         }
         setDate(newArray)
-        infoButton();
     }
 
     let arr = date;
@@ -84,28 +82,21 @@ function HomeActions({ setTooltipContent }) {
         }
     }
 
-    const infoButton = () => {
-        setTimeout(function () {
-            setHabilitateButton(false)
-        }, 2500)
-    }
-
 
     useEffect(() => {
         getInfoCountry();
     },[isDataCharged]);
-
 
     return (
         <Container maxWidth={"lg"}>
             <Paper elevation={4}>
                 <AppBar position="static">
                     <Toolbar>
-                        <CoronavirusOutlinedIcon fontSize={"large"}></CoronavirusOutlinedIcon>
+                        <CoronavirusOutlinedIcon fontSize={"large"}/>
                         <Typography variant="h4" style={{display: "flex", justifyContent:"center"}}  sx={{ flexGrow: 1 }}>
                             Casos diários de Covid
                         </Typography>
-                        <CoronavirusOutlinedIcon fontSize={"large"}></CoronavirusOutlinedIcon>
+                        <CoronavirusOutlinedIcon fontSize={"large"}/>
                     </Toolbar>
                 </AppBar>
             </Paper>
@@ -116,9 +107,8 @@ function HomeActions({ setTooltipContent }) {
                     justifyContent:"center",
                     margin: "10px 0",
                 }}>
-
                     <FormControl color={"primary"} sx={{ m: 1, minWidth: 250 }}>
-                        <InputLabel><CoronavirusOutlinedIcon fontSize={"small"}></CoronavirusOutlinedIcon> Variante</InputLabel>
+                        <InputLabel><CoronavirusOutlinedIcon fontSize={"small"}/> Variante</InputLabel>
                         <Select color={"primary"} onChange={onChange} label={"Variante"}>
                             <FormHelperText>Selecione a variante</FormHelperText>
                             {cases.slice(0,24).map((dados) => {
@@ -132,7 +122,6 @@ function HomeActions({ setTooltipContent }) {
                     </FormControl>
                 <Button variant={"outlined"}
                         sx={{m: 1, minWidth: 250}}
-                        disabled={habilitateButton}
                         onClick={() => onClickMap()}>
                     ▶ Iniciar timelapse
                 </Button>
