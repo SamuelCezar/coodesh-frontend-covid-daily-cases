@@ -38,7 +38,7 @@ function HomeActions({ setTooltipContent }) {
     /* Ao usar a database da Supabase descomentar a ApiKey abaixo e configurar o arquivo URL.js na pasta service */
 
     const getInfoCountry = () => {
-        axios.get(`${BASE_URL}`, /*Apikey*/).then((resp) => {
+        axios.get(`${BASE_URL}`, Apikey).then((resp) => {
             setCases(resp.data)
             dateCorrect();
             setIsDataCharged(true);
