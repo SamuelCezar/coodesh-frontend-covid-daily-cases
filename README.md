@@ -12,35 +12,28 @@ O projeto a ser desenvolvido tem como objetivo exibir o número de casos por pa�
 - HTML, CSS E JAVASCRIPT
 - React JS
 - Material UI
+- Supabase (servidor online)
 
 
 ### Veja o projeto funcionando em:
 
-
+https://coodesh-frontend-covid-daily-cases-samuelcezar.vercel.app/
 
 
 ### Imagem do layout final do projeto:
 
 ![aparencia final do projeto](src/assets/img/Example.png)
 
+### Como configurar e utilizar o projeto em 3 passos:
 
-### Como configurar e utilizar o projeto em 4 passos:
-
-##### 1- Clonar o repositório
+##### 1- Clonar o repositório.
 
 ##### 2 - Instalar as dependencias usando NPM ou Yarn:
 
 - npm install
 
-## ATENÇÃO!
-### Por questões de performance, por default default o projeto vai configurado para consumir os dados através de um servidor local, por isso será necessário subir o servidor JSONSERVER através do comando abaixo:
-
-#### 3- json-server --watch db.json --port 5000
-
-A porta utilizada tem que ser especificada para não conflitar com a porta usada para subir a aplicação React. Nesse caso a escolhida foi a 5000.
-
-#### OBS* O projeto também já vem pronto para usar a database fornecida Online pela Supabase. Basta mundar as rotas internas no arquivo URL.js.
-
-##### 4 - Iniciar o projeto
+#### 3- Iniciar o projeto!
   - npm start
+
+####OBS* Projeto não foi construido responsivamente, por isso para visualização ideal é necessário acessar via desktop.
 
