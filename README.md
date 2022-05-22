@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Coodesh Frontend Challenge 🏅 2022 - Covid Daily Cases
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Site: https://coodesh.com/
 
-## Available Scripts
+### Repositório do desafio da CODESH 
 
-In the project directory, you can run:
+## Desafio proposto
 
-### `npm start`
+Nesse desafio era necessário desenvolver uma REST API que utilizará o histórico de casos de Covid, disponível em https://www.kaggle.com/datasets/yamqwe/omicron-covid19-variant-daily-cases.
+No desafio também foi proposto desenvolver um projeto front-end para consumir as informações uma API gerada.
+O projeto a ser desenvolvido tem como objetivo exibir o número de casos por país, dia e variante. Para isso será necessário gerar um gráfico que mostre o mapa mundi.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Frameworks e tecnologias usadas:
+- HTML, CSS E JAVASCRIPT
+- React
+- Material UI
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+### Veja o projeto: https://covid-cases-really-3f58oa8kj-andreyna1808.vercel.app/
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### IMAGEM EM DESKTOP E MOBILE
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![resultado](https://user-images.githubusercontent.com/87716793/160861647-daea5d01-76d2-4880-b351-568e1a889473.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Como utilizar o projeto
 
-### `npm run eject`
+##### 1- Clonar o repositório
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  ##### 2- Entrar no diretório
+  ❯ cd CovidDailyCases
+  
+  ❯ cd cases-covid
+  
+##### 3- Para instalar as dependências e iniciar o projeto, você pode utilizar o Yarn ou NPM:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+##### 3.1 - Utilizando yarn
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+ ###### Instalar as dependências
+  ❯ yarn
 
-## Learn More
+###### Iniciar o projeto
+  ❯ yarn dev:server
+  
+##### 3.2 - Utilizando npm
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ ###### Instalar as dependências
+  ❯ npm install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+ ###### Iniciar o projeto
+  ❯ npm start
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
