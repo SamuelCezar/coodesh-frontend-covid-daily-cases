@@ -7,7 +7,6 @@ export default function Home() {
 
     return (
         <div>
-            {/*<Link to='/'><ButtonComeBack>Return Home</ButtonComeBack></Link>*/}
             <HomeActions setTooltipContent={setContent}/>
             <ReactTooltip>{content}</ReactTooltip>
         </div>

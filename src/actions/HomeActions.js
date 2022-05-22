@@ -1,65 +1,72 @@
-import React, {useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { ComposableMap, Geographies, Geography} from 'react-simple-maps';
 import axios from 'axios';
 import { Apikey, BASE_URL } from '../service/URL';
 import {
     AppBar,
-    Box,
     Button,
     Container,
     FormControl,
-    FormHelperText, IconButton,
+    FormHelperText,
     InputLabel,
-    MenuItem,
-    MenuIcon,
+    MenuItem, Paper,
     Select,
-    Toolbar, Typography
+    Toolbar,
+    Typography
 } from "@mui/material";
-// import { Button, DadosP, DateDados, DivInfo, DivInput, Paragrafo } from './style';
-const _ = require("lodash");
 
 const geoUrl = 'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
 
 function HomeActions({ setTooltipContent }) {
-    const [ infoCase, setInfoCases ] = useState([]);
-    const [ nameVariant, setNameVariant ] = useState('Alpha')
+    const [ isDataCharged, setIsDataCharged ] = useState(false)
+    const [ cases, setCases ] = useState([]);
+    const [ variant, setVariant ] = useState('Omicron')
     const [ date, setDate ] = useState([])
-    const [ dateSelect, setDateSelect] = useState('11/05/2020')
+    const [ dateSelected, setDateSelected] = useState('11/05/2020')
     const [ dateValue, setDateValue ] = useState(0)
-    const [ habilitButton, setHabilitButton ] = useState(true)
+    const [ habilitateButton, setHabilitateButton ] = useState(true)
 
     const onChange = (e) => {
-        setNameVariant(e.target.value)
+        setVariant(e.target.value)
     }
-    function dateSelectValue(value) {
+    function dateSelectedValue(value) {
         setDateValue(value)
-        setDateSelect(date[value - 1])
+        setDateSelected(date[value])
     }
 
     /*Ao usar a database da Supabase descomentar a ApiKey abaixo e configurar o basicService*/
+
     const getInfoCountry = () => {
-        axios.get(`${BASE_URL}`, Apikey).then((res) => {
-            setInfoCases(res.data);
+        axios.get(`${BASE_URL}`, /*Apikey*/).then((resp) => {
+            setCases(resp.data)
             dateCorrect();
+            setIsDataCharged(true);
         })
             .catch((err) => {
                 console.log(err.response);
             })
     };
 
-    function getTotalCases(coutryName) {
-        const covidDataTemp = infoCase.filter((coutry) => coutry.location === coutryName);
-        const dadosFiltrados = _.uniq(covidDataTemp)
-        const infoMore = dadosFiltrados.filter((info) => info.date === dateSelect && info.variant === nameVariant)
-        return infoMore.reduce((previousValue, currentValue) => previousValue + currentValue.num_sequences_total, 0)
+
+    function getTotalCases(countryName) {
+        const covidDataTemp = cases.filter((country) => country.location === countryName);
+        const dadosFiltrados = [... new Set(covidDataTemp)]
+        const infoMore = dadosFiltrados.filter((info) => info.date === dateSelected && info.variant === variant)
+        return infoMore.reduce((previousValue, currentValue) => previousValue + currentValue.num_sequences_total, "")
     }
 
+
     const dateCorrect = () => {
-        const filterRepetidos = infoCase.map((res) => res.date)
-        const filtrados = _.uniq(filterRepetidos)
+        const arrayDatas = cases.map((res) => res.date)
+        let arrayDatasFiltradas = [...new Set(arrayDatas)]
+        arrayDatasFiltradas.sort(function(a,b) {
+            a = a.split('/').reverse().join('');
+            b = b.split('/').reverse().join('');
+            return a.localeCompare(b);
+        });
         let newArray = []
-        for(let i = 0; i <= filtrados.length; i+=5){
-            newArray.push(filtrados[i])
+        for(let i = 0; i <= arrayDatasFiltradas.length; i+=5){
+            newArray.push(arrayDatasFiltradas[i])
         }
         setDate(newArray)
         infoButton();
@@ -70,27 +77,28 @@ function HomeActions({ setTooltipContent }) {
         for(let x = dateValue; x <= arr.length; x++){
             (function(x){
                 setTimeout(function(){
-                    setDateSelect(arr[x]);
+                    setDateSelected(arr[x]);
                     setDateValue(x)
-                }, x * 2000);
+                }, x * 1500);
             }(x));
         }
     }
 
     const infoButton = () => {
         setTimeout(function () {
-            setHabilitButton(false)
-        }, 4000)
+            setHabilitateButton(false)
+        }, 2500)
     }
+
 
     useEffect(() => {
         getInfoCountry();
-    });
+    },[isDataCharged]);
 
 
     return (
         <Container maxWidth={"lg"}>
-            <div>
+            <Paper elevation={4}>
                 <AppBar position="static">
                     <Toolbar>
                         <Typography variant="h4" style={{display: "flex", justifyContent:"center"}}  sx={{ flexGrow: 1 }}>
@@ -98,41 +106,39 @@ function HomeActions({ setTooltipContent }) {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-            </div>
-            <div style={{backgroundImage: "linear-gradient(to right, #e7e4e4, #e9dcdc, #ebd4d4, #edcbcb, #eec3c3)"}}>
+            </Paper>
 
+            <Paper elevation={4} style={{backgroundImage: "linear-gradient(to right, #d6dae0, #cbd3df, #c1ccdd, #b6c5dc, #abbeda)",
+            marginBottom:"10px"}}>
+                <div style={{display: "flex",
+                    justifyContent:"center",
+                    margin: "10px 0",
+                }}>
 
-            <div style={{display: "flex",
-                justifyContent:"center",
-                margin: "10px 0",
-                backgroundImage: "linear-gradient(to right, #e7e4e4, #e9dcdc, #ebd4d4, #edcbcb, #eec3c3)"
-            }}>
-                <FormControl color={"primary"} sx={{ m: 1, minWidth: 250 }}>
-                    <InputLabel >Variante</InputLabel>
-                    <Select color={"primary"} onChange={onChange} label={"Variante"}>
-                        <FormHelperText>Selecione a variante</FormHelperText>
-                        <MenuItem value={nameVariant}>Alpha</MenuItem>
-                        {infoCase.slice(1,24).map((dados) => {
-                            return (
-                                <MenuItem key={dados.id} value={dados.variant}>
-                                    {dados.variant}
-                                </MenuItem>
-                            );
-                        })}
-                    </Select>
-                </FormControl>
+                    <FormControl color={"primary"} sx={{ m: 1, minWidth: 250 }}>
+                        <InputLabel >Variante</InputLabel>
+                        <Select color={"primary"} onChange={onChange} label={"Variante"}>
+                            <FormHelperText>Selecione a variante</FormHelperText>
+                            {cases.slice(0,24).map((dados) => {
+                                return (
+                                    <MenuItem key={dados.id} value={dados.variant}>
+                                        {dados.variant}
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
                 <Button variant={"outlined"}
                         sx={{m: 1, minWidth: 250}}
-                        disabled={habilitButton}
+                        disabled={habilitateButton}
                         onClick={() => onClickMap()}>
                     ▶ Iniciar timelapse
                 </Button>
             </div>
 
-
-            <div style={{display: "flex", justifyContent: "center", margin: "25px 0"}}>
-                <h2 style={{margin: "0 10%"}}>Date: {dateSelect}</h2>
-                <h2 style={{margin: "0 10%"}}>Variant: {nameVariant}</h2>
+            <div style={{display: "flex", justifyContent: "center", marginTop: "25px"}}>
+                <h2 style={{margin: "0 10%"}}>Data: {dateSelected}</h2>
+                <h2 style={{margin: "0 10%"}}>Variante: {variant}</h2>
             </div>
 
             <div style={{width: "90%",
@@ -142,18 +148,19 @@ function HomeActions({ setTooltipContent }) {
                 flexDirection: "column"}}>
                 <div style={{ display: "flex", justifyContent: "space-between"}}>
                     {date.map((dados, index) => {
-                        return <p style={{padding: "2% 0", fontSize: "18px", overflow: "hidden"}} key={index}>{dados}</p>
+                        return <p style={{padding: "2% 0", fontSize: "18px", fontWeight:"bold"}} key={index}>{dados}</p>
                     })}
                 </div>
                 <input
+                    style={{marginBottom:"30px"}}
                     min='1'
                     max='8'
                     value={dateValue}
-                    onChange={(e) => dateSelectValue(e.target.value)}
+                    onChange={(e) => dateSelectedValue(e.target.value)}
                     type="range"
                 />
             </div>
-            </div>
+            </Paper>
             <div style={{backgroundImage: "linear-gradient(to right, #9296be, #7b7fba, #6468b5, #4d51af, #343aa8)"}} className="mx-1">
                 <ComposableMap data-tip="" projectionConfig={{ scale: 180 }}>
                     <Geographies geography={geoUrl}>
@@ -161,7 +168,6 @@ function HomeActions({ setTooltipContent }) {
                             geographies.map((geo) => {
                                 const infoGeo = geo.properties.NAME.slice(0,13);
                                 const resultado = getTotalCases(infoGeo)
-
                                 return (
                                     <Geography
                                         key={geo.rsmKey}
@@ -169,7 +175,7 @@ function HomeActions({ setTooltipContent }) {
                                         onMouseEnter={() => {
                                             let data = [];
                                             const totalCases = getTotalCases(infoGeo)
-                                            infoCase.forEach((info) => {
+                                            cases.forEach((info) => {
                                                 if (info.location === infoGeo) {
                                                     data = info;
                                                 }
