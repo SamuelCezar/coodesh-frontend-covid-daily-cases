@@ -35,7 +35,7 @@ function HomeActions({ setTooltipContent }) {
     }
 
 
-    const getInfoCountry = () => {
+    const getData = () => {
         axios.get(`${BASE_URL}`, Apikey).then((resp) => {
             setCases(resp.data)
             dateFormat();
@@ -77,14 +77,14 @@ function HomeActions({ setTooltipContent }) {
                 setTimeout(function(){
                     setDateSelected(arr[x]);
                     setDateValue(x)
-                }, x * 1500);
+                }, x * 250);
             }(x));
         }
     }
 
 
     useEffect(() => {
-        getInfoCountry();
+        getData();
     },[isDataCharged]);
 
     return (
