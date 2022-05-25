@@ -5,7 +5,7 @@ import { Apikey, BASE_URL } from '../service/URL';
 import CoronavirusOutlinedIcon from '@mui/icons-material/CoronavirusOutlined';
 import {
     AppBar,
-    Button,
+    Button, Chip,
     Container,
     FormControl,
     FormHelperText,
@@ -77,7 +77,7 @@ function HomeActions({ setTooltipContent }) {
                 setTimeout(function(){
                     setDateSelected(arr[x]);
                     setDateValue(x)
-                }, x * 250);
+                }, x * 1500);
             }(x));
         }
     }
@@ -127,9 +127,12 @@ function HomeActions({ setTooltipContent }) {
                 </Button>
             </div>
 
-            <div style={{display: "flex", justifyContent: "center", marginTop: "25px"}}>
-                <h2 style={{margin: "0 10%"}}>Data: {dateSelected}</h2>
-                <h2 style={{margin: "0 10%"}}>Variante: {variant}</h2>
+            <div style={{display: "flex", justifyContent: "center", marginTop: "25px", flexWrap:"wrap"}}>
+                <Chip style={{margin: "0 5%", fontSize:"20px"}}
+                      label={dateSelected !== undefined ? `Data: ${dateSelected}` : `Data: `}
+                      color="primary"
+                      size={"medium"}/>
+                <Chip style={{margin: "0 5%", fontSize:"20px"}} label={`Variante: ${variant}`} color="primary" size={"medium"}/>
             </div>
 
             <div style={{width: "90%",
@@ -137,9 +140,15 @@ function HomeActions({ setTooltipContent }) {
                 justifyContent: "center",
                 display: "flex",
                 flexDirection: "column"}}>
-                <div style={{ display: "flex", justifyContent: "space-between"}}>
-                    {date.map((dados, index) => {
-                        return <p style={{padding: "2% 0", fontSize: "18px", fontWeight:"bold"}} key={index}>{dados}</p>
+                <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap"}}>
+                    {date.map((dados) => {
+                        if(dados!== undefined){
+                            return <Chip style={{margin: "4% 0.5%" , fontWeight:"bold"}}
+                                         label={dados}
+                                         color="primary"
+                                         size={"medium"}
+                                         variant={"outlined"}/>
+                        }
                     })}
                 </div>
                 <input
